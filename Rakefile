@@ -1,3 +1,5 @@
+task :default => :jekyll
+
 desc 'Build Compass output'
 task :compass => :'compass:clean' do
   system 'compass compile --config config/compass.rb'
@@ -16,8 +18,8 @@ namespace :compass do
 end
 
 desc 'Start local server'
-task :server => :jekyll do
-  system 'shotgun config.ru'
+task :server do
+  system 'foreman start'
 end
 
 desc 'Clean and rebuild the Jekyll site'

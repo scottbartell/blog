@@ -4,32 +4,32 @@ title: Hi, I'm Sam.
 ---
 
 <header>
-  <h1><a href="{{ site.url }}" rel="home">Hi, I'm Sam.</a></h1>
-  <p>I like to <a href="http://github.com/samsoffes" rel="external nofollow">create software</a>, <a href="{{ site.url }}/music">make music</a>, and <a href="{{ site.url }}/blog">write about technology</a>.</p>
-  <p>Find out <a href="{{ site.url }}/about">more about me</a>.</p>
+  <h1><a href="/" rel="home">Hi, I'm Sam.</a></h1>
+  <p>I like to <a href="http://github.com/samsoffes" rel="external nofollow">create software</a>, <a href="/music">make music</a>, and <a href="/blog">write about technology</a>.</p>
+  <p>Find out <a href="/about">more about me</a>.</p>
 </header>
 
 <section class="home">
-  <h2><a href="{{ site.url }}/blog">I like to write about technology</a></h2>
+  <h2><a href="/blog">I like to write about technology</a></h2>
   <p>Writing about technology is enjoyable. I've written a few tutorials <a href="http://www.google.com/search?q=how+to+sync+itunes+with+dropbox" rel="external nofollow">that Google really likes</a>. Here's a bit from my latest post:</p>
   <article>
     <header>
       {% assign recent_post = site.posts.first %}
       <h3><a href="{{ site.url | append: recent_post.url }}">{{ recent_post.title }}</a></h3>
-      <p>Posted <time datetime="{{ recent_post.date | date_to_xmlschema }}">{{ recent_post.date | date: "%m/%d/%y" }}</time> {% for tag in recent_post.tags %} &middot; <a href="{{ site.url }}/tags/{{ tag }}" rel="tag">{{tag}}</a>{% endfor %}</p>
+      <p>Posted <time datetime="{{ recent_post.date | date_to_xmlschema }}">{{ recent_post.date | date: "%m/%d/%y" }}</time> {% for tag in recent_post.tags %} &middot; <a href="/tags/{{ tag }}" rel="tag">{{tag}}</a>{% endfor %}</p>
     </header>
     {{ recent_post.content | truncatewords: 50 }}
-    <p class="more"><a href="{{ site.url }}/blog">Read more &raquo;</p>
+    <p class="more"><a href="/blog">Read more &raquo;</p>
   </article>
   
   <h2><a href="http://github.com/samsoffes" rel="external nofollow">I like to create software</a></h2>
   <p>I have a few decently popular open source projects like <a href="http://sstoolk.it" rel="external nofollow">SSToolkit</a>. It's a collection of useful iOS classes I've been working on since the iPhone SDK was announced in 2008. My blog is also <a href="http://github.com/samsoffes/samsoff.es" rel="external nofollow">open source</a>. Check out all of <a href="http://github.com/samsoffes" rel="external nofollow">my open source stuff on GitHub</a>.</p>
   <p>I'm currently <i>not</i> looking for any projects. You can <a href="http://samsoff.es/resume">download my résumé</a> if you want though. <span class="gray">(If you are a third-party recruiter, please don't contact me about employment opportunities. Thanks.)</span></p>
 
-  <h2><a href="{{ site.url }}/music">I like to make music</a></h2>
+  <h2><a href="/music">I like to make music</a></h2>
   <div class="music">
     <a href="http://findingchesterfield.com" rel="external nofollow" class="bordered-image fc-art"><img src="http://assets.samsoff.es/images/fc-art.jpg" alt="Finding Chesterfield - A Three Day Walk EP" /></a>
-    <p>I'm a major perfectionist and not too happy with any of my music. I put some of my music on my site and I'm super embarrassed by all of it. Anyway, some people like it. <a href="{{ site.url }}/music">Give it a listen</a>.</p>
+    <p>I'm a major perfectionist and not too happy with any of my music. I put some of my music on my site and I'm super embarrassed by all of it. Anyway, some people like it. <a href="/music">Give it a listen</a>.</p>
     <p>Also, checkout my band, <a href="http://findingchesterfield.com" rel="external nofollow">Finding Chesterfield</a>. We just released an album last year. I am way proud of it. You can <a href="http://itunes.apple.com/us/album/a-three-day-walk-ep/id396382460" rel="external nofollow">buy it on iTunes</a> if you want.</p>
   </div>
 
@@ -48,5 +48,5 @@ title: Hi, I'm Sam.
 </section>
 
 <footer>
-  <p>Copyright &copy; 2011 <a href="{{ site.url }}" rel="home">Sam Soffes</a></p>
+  <p>Copyright &copy; 2011 <a href="/" rel="home">Sam Soffes</a></p>
 </footer>

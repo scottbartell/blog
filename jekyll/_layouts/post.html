@@ -5,8 +5,8 @@ layout: default
 <section class="blog">
   <article>
     <header>
-      <h2><a href="{{ site.url }}{{ page.url }}">{{ page.title }}</a></h2>
-      <p>Posted <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%m/%d/%y" }}</time> {% for tag in page.tags %} &middot; <a href="{{ site.url }}/tags/{{ tag }}" rel="tag">{{tag}}</a>{% endfor %}</p>
+      <h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
+      <p>Posted <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%m/%d/%y" }}</time> {% for tag in page.tags %} &middot; <a href="/tags/{{ tag }}" rel="tag">{{tag}}</a>{% endfor %}</p>
     </header>
     {{ content }}
   </article>
