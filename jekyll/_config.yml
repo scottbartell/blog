@@ -1,0 +1,6 @@
+markdown: rdiscount
+permalink: /posts/:title
+auto: true
+
+url: http://localhost:9292
+title: Sam Soffes
