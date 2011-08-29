@@ -4,6 +4,8 @@ title: Running Rails Local Development with Nginx, Postgres, and Passenger with 
 tags: [development, heroku, homebrew, local-development, nginx, passenger, postgres, rails]
 ---
 
+_**Note:** This post is wildly outdated._
+
 Lately I have been playing with [Homebrew][], an awesome package manager for Mac OS X. I really like not having to worry about dependencies and such when installing. The "rarely sudo" mentality is also pretty great.
 
 When I noticed the [Nginx][] (a sweet open source web server that is way better than Apache) had a `--with-passenger` option (which is also way awesome), I figured I'd give it a shot. I was using the built-in Apache with [Passenger][] [Preference Pane](http://github.com/alloy/passengerpane), which was pretty cool, but I really like Nginx, so I switched. I also really wanted to start using [PostgreSQL][] instead of SQLite since all of my stuff is hosted on [Heroku][] and that's what they're running. (I do plan on writing a Preference Pane for doing for this setup eventually.)
@@ -77,14 +79,14 @@ This probably goes without saying, but you'll need [Xcode installed](http://deve
     2. I am pointing the `passenger_root` directive to the passenger root. This will change with whatever version of Passenger you have installed. You can get the current path by running `passenger-config --root` (you'll probably need to do this since the version is in the path).
     
     3. I also have `passenger_ruby` set to `gem_ruby`. I had a horrible time getting Passenger to see my custom `GEM_PATH` (that I setup by following the [Homebrew wiki](http://wiki.github.com/mxcl/homebrew/cpan-ruby-gems-and-python-disttools)). I created this little shell script to fix the environment variables. It would be great if Passenger had a way to do this. I know you can in the Apache version, but I couldn't figure it out for Nginx. Here is what my `gem_ruby` looks like:
-    
-        {% highlight sh %}
+
+{% highlight sh %}
 #!/bin/bash
 export GEM_PATH=/usr/local/Cellar/Gems/1.8:/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/lib/ruby/gems/1.8/gems
 export GEM_HOME=/usr/local/Cellar/Gems/1.8
 
 /usr/bin/ruby $*
-        {% endhighlight %}
+{% endhighlight %}
 
 2. I like to keep all of my virtual hosts in separate files in the `conf` directory and then include them into `nginx.conf`, but you can do it however you want. Here is what `samsoffes.conf` looks like:
 
@@ -117,31 +119,29 @@ export GEM_HOME=/usr/local/Cellar/Gems/1.8
 
 1. If you haven't already, edit your application's `database.yml` file to use PostgreSQL. Here is an example:
 
-        {% highlight yaml %}
-development:
-  adapter: postgresql
-  database: samsoffes_development
-  encoding: utf8
-  username: samsoffes
-  password:
-  host: localhost
+        development:
+          adapter: postgresql
+          database: samsoffes_development
+          encoding: utf8
+          username: samsoffes
+          password:
+          host: localhost
 
-production:
-  adapter: postgresql
-  database: samsoffes_production
-  encoding: utf8
-  username: samsoffes
-  password:
-  host: localhost
+        production:
+          adapter: postgresql
+          database: samsoffes_production
+          encoding: utf8
+          username: samsoffes
+          password:
+          host: localhost
 
-test:
-  adapter: postgresql
-  database: samsoffes_test
-  encoding: utf8
-  username: samsoffes
-  password:
-  host: localhost
-        {% endhighlight %}
+        test:
+          adapter: postgresql
+          database: samsoffes_test
+          encoding: utf8
+          username: samsoffes
+          password:
+          host: localhost
     
     Notice that the username is `samsoffes` and not `root`. Using the `root` user is considered bad practice by most. (We'll create that user in the next step.)
 
