@@ -1,5 +1,6 @@
-markdown: rdiscount
+markdown: redcarpet
 permalink: /posts/:title
 auto: true
+pygments: true
 
 title: Sam Soffes

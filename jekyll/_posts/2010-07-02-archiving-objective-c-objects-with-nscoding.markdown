@@ -20,15 +20,88 @@ There are two things you have to do: *implement NSCoding* and then *use the arch
 
 Say you have an object that looks like this:
 
-{{gist: 461461, Note.h}}
-{{gist: 461461, Note.m}}
+{% highlight objc %}
+@interface Note : NSObject {
+	NSString *title;
+	NSString *author;
+	BOOL published;
+}
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic) BOOL published;
+
+@end
+{% endhighlight %}
+
+{% highlight objc %}
+#import "Note.h"
+
+@implementation Note
+
+@synthesize title;
+@synthesize author;
+@synthesize published;
+
+- (void)dealloc {
+	[title release];
+	[author release];
+	[super dealloc];
+}
+
+@end
+{% endhighlight %}
 
 Pretty simple, right?
 
 Now, all you have to do to implement NSCoding is the following:
 
-{{gist: 461468, Note.h}}
-{{gist: 461468, Note.m}}
+{% highlight objc %}
+@interface Note : NSObject <NSCoding> {
+	NSString *title;
+	NSString *author;
+	BOOL published;
+}
+
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic) BOOL published;
+
+@end
+{% endhighlight %}
+
+{% highlight objc %}
+#import "Note.h"
+
+@implementation Note
+
+@synthesize title;
+@synthesize author;
+@synthesize published;
+
+- (void)dealloc {
+	[title release];
+	[author release];
+	[super dealloc];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]) {
+		self.title = [decoder decodeObjectForKey:@"title"];
+		self.author = [decoder decodeObjectForKey:@"author"];
+		self.published = [decoder decodeBoolForKey:@"published"];
+	}
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:title forKey:@"time"];
+	[encoder encodeObject:author forKey:@"author"];
+	[encoder encodeBool:published forKey:@"published"];
+}
+
+@end
+{% endhighlight %}
 
 Pretty simple. All I did was add the `<NSCoding>` protocol delectation in the header file and `initWithCoder:` and `encodeWithCoder:` in the implementation. You use these methods to tell `NSCoder` how to encode your object into data. Notice how two of the variables are objects and one was a `BOOL`. You have to use different methods for non-objects. The [NSCoder documentation](http://developer.apple.com/mac/library/documentation/Cocoa/Reference/Foundation/Classes/NSCoder_Class/Reference/NSCoder.html) has the full list.
 
@@ -38,8 +111,16 @@ Remember, that you can use `NSCoder` to archive your object however whatever you
 
 This part is also really easy. Let's say you have an array of notes that you want to put into `NSUserDefaults`, here's the code:
 
-{{gist: 461479, archive.m}}
+{% highlight objc %}
+// Given `notes` contains an array of Note objects
+NSData *data = [NSKeyedArchiver archivedDataWithRootObject:notes];
+[[NSUserDefaults standardUserDefaults] setObject:data forKey:@"notes"];
+{% endhighlight %}
 
 Unarchiving is just as easy:
 
-{{gist: 461479, unarchive.m}}
+{% highlight objc %}
+NSData *notesData = [[NSUserDefaults standardUserDefaults] objectForKey:@"notes"];
+NSArray *notes = [NSKeyedUnarchiver unarchiveObjectWithData:notesData];
+{% endhighlight %}
+

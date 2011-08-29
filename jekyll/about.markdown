@@ -1,9 +1,9 @@
 ---
-layout: default
+layout: page
 title: About Sam.
+section_class: about
 ---
 
-<section class="about">
 <a href="http://www.flickr.com/photos/samsoffes/5910043084/in/set-72157627008591241/lightbox/" rel="external nofollow" id="portrait"><img src="http://assets.samsoff.es/images/Sam-Soffes.jpg" alt="Sam Soffes" /></a>
   
 I am a [iOS and Rails software engineer](http://github.com/samsoffes), [musician](http://samsoff.es/music), [wanna be designer](http://dribbble.com/samsoffes), and burger connoisseur. I live in San Francisco. I work at [Synthetic](http://heysynthetic.com) (the makes of [Hipstamatic](http://hipstamatic.com)).
@@ -17,4 +17,3 @@ You can [download my résumé](http://samsoff.es/resume) if you want. I'm not ac
 [Email me](&#109;&#97;&#105;&#108;&#116;&#111;&#58;%73%61%6d@%73%61%6d%73%6f%66%66.%65%73) and say hi, [follow me on Twitter](http://twitter.com/samsoffes), or endorse me below (with [Zerply](http://zerp.ly/i/vnc0j)).
   
 <script type="text/javascript" src="http://get.zerply.com/js/widget/remote.js"></script><script type="text/javascript">widget = new zerplyTC({container: 'ZE-widget', key: 'f1174d2354f0f008a70bec063acc1947', width: '302'}); widget.init();</script><div id="ZE-widget"></div>
-</section>

@@ -45,7 +45,30 @@ This probably goes without saying, but you'll need [Xcode installed](http://deve
 
 1. Modify your Nginx configuration for Passenger. It will be located at `/usr/local/Cellar/nginx/0.7.62/conf/nginx.conf` (obviously you will need to replace the version number with whatever version you installed). Here is what mine looks like.
 
-    {{gist: 245177, nginx.conf}}
+        user samsoffes staff;
+        worker_processes 1;
+
+        error_log logs/error.log;
+
+        events {
+          worker_connections  1024;
+        }
+
+        http {
+          include mime.types;
+          default_type application/octet-stream;
+
+          # Passenger
+          passenger_root /usr/local/Cellar/Gems/1.8/gems/passenger-2.2.7;
+          passenger_ruby /usr/local/bin/gem_ruby;
+          passenger_default_user samsoffes;
+
+          sendfile on;
+          keepalive_timeout 65;
+
+          # Include virtual host configurations
+          include samsoffes.conf;
+        }
     
     There are a few things to note:
     
@@ -55,21 +78,70 @@ This probably goes without saying, but you'll need [Xcode installed](http://deve
     
     3. I also have `passenger_ruby` set to `gem_ruby`. I had a horrible time getting Passenger to see my custom `GEM_PATH` (that I setup by following the [Homebrew wiki](http://wiki.github.com/mxcl/homebrew/cpan-ruby-gems-and-python-disttools)). I created this little shell script to fix the environment variables. It would be great if Passenger had a way to do this. I know you can in the Apache version, but I couldn't figure it out for Nginx. Here is what my `gem_ruby` looks like:
     
-        {{gist: 245177, gem_ruby.sh}}
+        {% highlight sh %}
+#!/bin/bash
+export GEM_PATH=/usr/local/Cellar/Gems/1.8:/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/lib/ruby/gems/1.8/gems
+export GEM_HOME=/usr/local/Cellar/Gems/1.8
+
+/usr/bin/ruby $*
+        {% endhighlight %}
 
 2. I like to keep all of my virtual hosts in separate files in the `conf` directory and then include them into `nginx.conf`, but you can do it however you want. Here is what `samsoffes.conf` looks like:
 
-    {{gist: 245177, samsoffes.conf}}
+        server {
+          listen 80;
+          server_name samsoffes.local;
+          root /Users/samsoffes/code/samsoffes/samsoff.es/public;
+
+          rails_env development;
+          passenger_enabled on;
+
+          charset utf-8;
+        }
 
 3. You will need to edit your `/etc/hosts` for any virtual hosts you add. Mine looks like this:
 
-    {{gist: 245177, hosts}}
+        ##
+        # Host Database
+        #
+        # localhost is used to configure the loopback interface
+        # when the system is booting.  Do not change this entry.
+        ##
+        127.0.0.1	localhost
+        255.255.255.255	broadcasthost
+        ::1             localhost 
+        fe80::1%lo0	localhost
+        127.0.0.1 samsoffes.local
 
 ### Database Configuration
 
 1. If you haven't already, edit your application's `database.yml` file to use PostgreSQL. Here is an example:
 
-    {{gist: 245177, database.yml}}
+        {% highlight yaml %}
+development:
+  adapter: postgresql
+  database: samsoffes_development
+  encoding: utf8
+  username: samsoffes
+  password:
+  host: localhost
+
+production:
+  adapter: postgresql
+  database: samsoffes_production
+  encoding: utf8
+  username: samsoffes
+  password:
+  host: localhost
+
+test:
+  adapter: postgresql
+  database: samsoffes_test
+  encoding: utf8
+  username: samsoffes
+  password:
+  host: localhost
+        {% endhighlight %}
     
     Notice that the username is `samsoffes` and not `root`. Using the `root` user is considered bad practice by most. (We'll create that user in the next step.)
 
@@ -99,7 +171,7 @@ Before, I found myself typing `sudo apachectl restart` a lot to reload my applic
 
 That probably seemed a bit tedious, but now all you have to do is create a virtual host in Nginx, add it your your hosts file, and create your database. I really like developing locally like this. [Homebrew][] makes this entire process *very easy*.
 
-If you have any issues, feel free to [send me an email](mailto:sam@samsoff.es) and I'll see what I can do. (I really need to get comments going on here don't I)
+If you have any issues, feel free to [send me an email](mailto:sam@samsoff.es) and I'll see what I can do.
 
 [Homebrew]: http://github.com/mxcl/homebrew
 [Nginx]: http://nginx.net

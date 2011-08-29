@@ -46,7 +46,37 @@ As a disclaimer, I am all about Objective-C. I love it. I'm not one of those eng
 
 Here's the code:
 
-{{gist: 840291, date.m}}
+{% highlight objc %}
+#include <time.h>
+
++ (NSDate *)dateFromISO8601String:(NSString *)string {
+    if (!string) {
+        return nil;
+    }
+    
+    struct tm tm;
+    time_t t;    
+    
+    strptime([string cStringUsingEncoding:NSUTF8StringEncoding], "%Y-%m-%dT%H:%M:%S%z", &tm);
+    tm.tm_isdst = -1;
+    t = mktime(&tm);
+    
+    return [NSDate dateWithTimeIntervalSince1970:t + [[NSTimeZone localTimeZone] secondsFromGMT]];
+}
+
+
+- (NSString *)ISO8601String {
+    struct tm *timeinfo;
+    char buffer[80];
+
+    time_t rawtime = [self timeIntervalSince1970] - [[NSTimeZone localTimeZone] secondsFromGMT];
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer, 80, "%Y-%m-%dT%H:%M:%S%z", timeinfo);
+    
+    return [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
+}
+{% endhighlight %}
 
 See, it's not too crazy. *Using the C date stuff took my date parsing from 7.4 seconds to 300ms. Talk about a performance boost!* (I updated [SSTookit](http://github.com/samsoffes/sstoolkit)'s [NSDate category](https://github.com/samsoffes/sstoolkit/blob/master/SSToolkit/NSDate%2BSSToolkitAdditions.h) to use this new code.)
 
@@ -54,7 +84,18 @@ See, it's not too crazy. *Using the C date stuff took my date parsing from 7.4 s
 
 I have several `NSString` categories in my application for doing various things. Some of them were called throughout the process I was trying to optimize. I drilled down in the time profiler instrument and realized that `[NSRegularExpression regularExpressionWith...]` was taking a ton of the time. This totally makes sense, since it compiles your regex to use later and I was doing it each time. Simple solution:
 
-{{gist: 840291, string.m}}
+{% highlight objc %}
+- (NSString *)camelCaseString {
+    static NSRegularExpression *regex = nil;
+    if (!regex) {
+        regex = [[NSRegularExpression alloc] initWithPattern:@"(?:_)(.)" options:0 error:nil];
+    }
+    
+    // Use regex...
+    
+    return string;
+}
+{% endhighlight %}
 
 This was actually the easiest part :)
 

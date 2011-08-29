@@ -1,8 +1,10 @@
 ---
 layout: default
 ---
-<header>
-  <h2><a href="{{ site.url | append: page.url }}">{{ page.title }}</a></h2>
-</header>
-
-{{ content }}
+<section{% if section_class %} class="{{ section_class }}"{% endif %}>
+  <header>
+    <h2><a href="{{ site.url | append: page.url }}">{{ page.title }}</a></h2>
+  </header>
+  
+  {{ content }}
+</section>

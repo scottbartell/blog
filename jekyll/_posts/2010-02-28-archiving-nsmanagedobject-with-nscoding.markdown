@@ -10,17 +10,82 @@ I needed to persist an array of NSManagedObjects to NSUserDefaults to persist th
 
 This was actually really easy. See:
 
-{{gist: 317794, SSManagedObject.h}}
-{{gist: 317794, SSManagedObject.m}}
+{% highlight objc %}
+//
+//  SSManagedObject.h
+//  Archiving NSManagedObject with NSCoding
+//
+//  Created by Sam Soffes on 2/28/10.
+//  Copyright 2010 Sam Soffes. All rights reserved.
+//
+
+extern NSString *kURIRepresentationKey;
+
+@interface SSManagedObject : NSManagedObject <NSCoding> {
+
+}
+
+@end
+{% endhighlight %}
+
+{% highlight objc %}
+//
+//  SSManagedObject.m
+//  Archiving NSManagedObject with NSCoding
+//
+//  Created by Sam Soffes on 2/28/10.
+//  Copyright 2010 Sam Soffes. All rights reserved.
+//
+
+#import "SSManagedObject.h"
+#import "AppDelegate.h"
+
+NSString *kURIRepresentationKey = @"URIRepresentation";
+
+@implementation SSManagedObject
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    AppDelegate *appDelegate = [AppDelegate sharedAppDelegate];
+    NSPersistentStoreCoordinator *psc = [appDelegate persistentStoreCoordinator];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    self = (SSManagedObject *)[[context objectWithID:[psc managedObjectIDForURIRepresentation:(NSURL *)[decoder decodeObjectForKey:kURIRepresentationKey]]] retain];
+    return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:[[self objectID] URIRepresentation] forKey:kURIRepresentationKey];
+}
+
+@end
+{% endhighlight %}
+
 
 I always add `+ (id)sharedAppDelegate` to my application delegate to save some typing:
 
-{{gist: 317794, AppDelegate.m}}
+{% highlight objc %}
++ (AppDelegate *)sharedAppDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+{% endhighlight %}
 
 Pretty simple right? Then you can do something like this to archive your objects:
 
-{{gist: 317794, archive.m}}
+{% highlight objc %}
+[[[AppDelegate sharedAppDelegate] managedObjectContext] save:nil];
+NSData *archivedObjects = [NSKeyedArchiver archivedDataWithRootObject:objects];
+
+NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+[userDefaults setObject:archivedObjects forKey:@"someKey"];
+[userDefaults synchronize];
+{% endhighlight %}
 
 Unarchiving is also super easy:
 
-{{gist: 317794, unarchive.m}}
+{% highlight objc %}
+NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+NSData *objectsData = [userDefaults objectForKey:@"someKey"];
+if ([objectsData length] > 0) {
+    NSArray *objects = [NSKeyedUnarchiver unarchiveObjectWithData:objectsData]];
+}
+{% endhighlight %}

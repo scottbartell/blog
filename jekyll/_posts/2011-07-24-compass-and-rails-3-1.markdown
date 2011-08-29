@@ -8,11 +8,17 @@ Here's how I finally got Compass working with Rails 3.1rc4 (with includes, sprit
 
 Gemfile excerpt:
 
-{{gist: 1103112, Gemfile}}
+{% highlight ruby %}
+gem 'sass-rails', :git => 'https://github.com/rails/sass-rails.git', :ref => '031236b31eaf20658226a9ae051749cc6647c33f'
+gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :ref => '2c1fcfcad708875d10db65740aabf417abc636a6'
+gem 'sprockets', '2.0.0.beta.10'
+{% endhighlight %}
 
 config/compass.rb excerpt:
 
-{{gist: 1103112, compass.rb}}
+{% highlight ruby %}
+http_images_path = '/assets/'
+{% endhighlight %}
 
 **That's it.** You don't have to do any of the crazy initializer hacks or anything like that. (If you were doing that, you can remove it all). The rest of my Gemfile and compass.rb are just standard stuff. Here's my [full compass.rb](https://gist.github.com/1103112#file_full_compass.rb) if that helps though.
 
@@ -27,6 +33,9 @@ Rails 3.1.0.rc5 just came out. Here's the updates for rc5.
 
 Gemfile excerpt:
 
-{{gist: 1103112, Gemfile_rc5.rb}}
+{% highlight ruby %}
+gem 'sass-rails', :git => 'https://github.com/rails/sass-rails.git', :ref => '231b14da040c3ad320076cbaaa70190d14b95d37'
+gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :ref => '33263caffe5548a64253976c0a034afe1ed567f4'
+{% endhighlight %}
 
 **That's it!** Your compass.rb remains the same as before with `http_images_path`. You don't need to add `.css` to partials' file names any more now!

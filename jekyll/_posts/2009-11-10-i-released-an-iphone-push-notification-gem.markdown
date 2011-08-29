@@ -12,13 +12,19 @@ So I know this is very backwards, but *after* it was on [GemCutter][] I tested i
 
 Before, it would add the model in the plugin to your search path and then you would have to run a custom rake task in the plugin to add the table and migrate the database for the model. This always felt a little dirty, so I abstracted it all out. Now you can do:
 
-{{gist: 317771, device.rb}}
+{% highlight ruby %}
+class Device < ActiveRecord::Base
+    acts_as_pushable
+end
+{% endhighlight %}
 
 Pretty cool, right? Now sending is as easy as
 
-{{gist: 317771, send_alert.rb}}
+{% highlight ruby %}
+device.send_notification :alert => "Hello world!"
+{% endhighlight %}
 
-(`d` being an instance of `Device` of course). You can read the [full readme on GitHub](http://github.com/samsoffes/apple_push_notification). (Yes, another smack on the hand for no RDoc.)
+You can read the [full readme on GitHub](http://github.com/samsoffes/apple_push_notification). (Yes, another smack on the hand for no RDoc.)
 
 Anyway, my code is probably very bad, as I'm pretty new to Ruby and Rails. I was very proud of myself for figuring it out. *[Check out the gem](http://github.com/samsoffes/apple_push_notification)* and let me know if you find it useful or stupid.
 

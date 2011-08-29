@@ -34,7 +34,7 @@ namespace :jekyll do
   end
 
   desc 'Clean site and start watching'
-  task :auto => [:compass, :'jekyll:clean'] do
+  task :watch => [:compass, :'jekyll:clean'] do
     system 'jekyll jekyll jekyll/_site --auto'
   end
 end
