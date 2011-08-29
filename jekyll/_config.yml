@@ -2,5 +2,5 @@ markdown: rdiscount
 permalink: /posts/:title
 auto: true
 
-url: http://localhost:9292
+url: http://localhost:9393
 title: Sam Soffes

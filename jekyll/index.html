@@ -16,7 +16,7 @@ title: Hi, I'm Sam.
     <header>
       {% assign recent_post = site.posts.first %}
       <h3><a href="{{ site.url | append: recent_post.url }}">{{ recent_post.title }}</a></h3>
-      <p>Posted <time datetime="{{ recent_post.date | date_to_xmlschema }}">{{ recent_post.date }}</time> {% for tag in recent_post.tags %} &middot; <a href="{{ site.url }}/tags/{{ tag }}" rel="tag">{{tag}}</a>{% endfor %}</p>
+      <p>Posted <time datetime="{{ recent_post.date | date_to_xmlschema }}">{{ recent_post.date | date: "%m/%d/%y" }}</time> {% for tag in recent_post.tags %} &middot; <a href="{{ site.url }}/tags/{{ tag }}" rel="tag">{{tag}}</a>{% endfor %}</p>
     </header>
     {{ recent_post.content | truncatewords: 50 }}
     <p class="more"><a href="{{ site.url }}/blog">Read more &raquo;</p>
