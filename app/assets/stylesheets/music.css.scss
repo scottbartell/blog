@@ -1,0 +1,53 @@
+@import "compass/css3";
+@import "partials/shared";
+
+section.music {
+  @include clearfix;
+}
+
+div#waveform-container {
+  width: 640px;
+  height: 200px;
+  background: #eaeaea;
+  margin-bottom: 2em;
+  border: 1px solid #fff;
+  position: relative;
+  @include transition-property(box-shadow);
+  @include transition-duration(0.2s);
+  @include single-box-shadow(rgba(0, 0, 0, 0.5), 0, 0, 3px);
+  
+  &:hover {
+    @include single-box-shadow(rgba(0, 0, 0, 1.0), 0, 0, 3px);
+    cursor: pointer;
+  }
+}
+
+div#waveform-fill {
+  width: 0;
+  height: 200px;
+  background: $red-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+div#waveform {
+  width: 640px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+div.column {
+  width: 300px;
+  text-align: justify;
+  
+  &.left {
+    float: left;
+  }
+  
+  &.right {
+    float: right;
+  }
+}

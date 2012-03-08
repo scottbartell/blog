@@ -1,36 +1,20 @@
-<%- title "Music by Sam." -%>
-<%- javascript 'jquery', 'music' -%>
+<%- title 'Music' -%>
+<%- stylesheet 'music' -%>
+<%- javascript 'music' -%>
 
-<header>
-  <h2><%= link_to 'Music by Sam.', music_url %></h2>
+<header class="music">
+  <div id="waveform-container">
+    <div id="waveform-fill"></div>
+    <div id="waveform"></div>
+  </div>
 </header>
 
 <section class="music">
-  <p>I started on this project called <%= link_to 'The Experiment', podcast_url %> a couple of years ago. It’s my on and off again attempt to create an album. I’m a major perfectionist and not too happy with any of it. I put it out there as an experiment and some people seemed to like it, so I keep working on it here and there.</p>
-
-  <p>Also, checkout my band, <a href="http://findingchesterfield.com" rel="external nofollow">Finding Chesterfield</a>. We just released an album in October. I am way proud of it. You can buy it on iTunes.</p>
-
-  <p>Here is my music:</p>
-
-  <h3>Rough Tracks</h3>
-  <ul class="tracks">
-    <li>Airports <a href="http://soundcloud.com/samsoffes/airports">Listen</a></li>
-    <li>After The Rain <a href="http://soundcloud.com/samsoffes/after-the-rain-2">Listen</a></li>
-    <li>New Home <a href="http://soundcloud.com/samsoffes/new-home">Listen</a></li>
-    <li>To Wait A Lifetime Intro <a href="http://soundcloud.com/samsoffes/to-wait-a-lifetime-intro">Listen</a></li>
-    <li>Years <a href="http://soundcloud.com/samsoffes/years">Listen</a></li>
-    <li>Discover <a href="http://soundcloud.com/samsoffes/discover">Listen</a></li>
-    <li>Something I Found <a href="http://soundcloud.com/samsoffes/something-i-found">Listen</a></li>
-  </ul>
-
-  <h3>Really Rough Tracks</h3>
-  <ul class="tracks">
-    <li>Old Tickets <a href="http://soundcloud.com/samsoffes/old-tickets">Listen</a></li>
-    <li>Something I Wish I Had <a href="http://soundcloud.com/samsoffes/something-i-wish-i-had">Listen</a></li>
-  </ul>
-
-  <h3>Noise</h3>
-  <ul class="tracks">
-    <li>The Rain <a href="http://soundcloud.com/samsoffes/the-rain-2">Listen</a></li>
-  </ul>
+  <div id="player"></div>
+  <h3>New Home</h3>
+  <div class="column left">
+    <p>I wrote this song in February of 2009 in Edmond, Okalahoma. I had just bought my first house at 19 years old a few days before writing and recording this.</p>
+    <p>I remember being so excited to finally be able to play in my own place. I wrote and recorded all of the parts in a couple of hours one evening. It was a fantastic night.</p>
+    <p>This song is still one of my favorites because of it’s energy and rocking guitar part. It’s a lot more rock than most of my stuff. I think that’s why I’m such a big fan of this one.</p>
+  </div>
 </section>
