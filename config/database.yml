@@ -1,23 +1,32 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: samsoffes_development
+  database: bartell_development
   host: localhost
+  username: postgres
+  password: password
+  template: template0
   pool: 5
   min_messages: WARNING
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: samsoffes_test
+  database: bartell_test
   host: localhost
+  username: postgres
+  password: password
+  template: template0
   pool: 5
   min_messages: WARNING
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: samsoffes_production
+  database: bartell_production
   host: localhost
+  username: postgres
+  password: password
+  template: template0
   pool: 5
   min_messages: WARNING

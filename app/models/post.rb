@@ -61,7 +61,7 @@ class Post < ActiveRecord::Base
       space_after_headers: true,
       superscript: true
     }
-    markdown = Redcarpet::Markdown.new(SamSoffes::MarkdownRenderer, options)
+    markdown = Redcarpet::Markdown.new(ScottBartell::MarkdownRenderer, options)
     self.html_content = markdown.render(self.content)
   end
 

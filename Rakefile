@@ -6,4 +6,4 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 require 'rdoc/task'
 
-SamSoffes::Application.load_tasks
+ScottBartell::Application.load_tasks

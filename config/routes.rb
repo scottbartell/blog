@@ -1,4 +1,4 @@
-SamSoffes::Application.routes.draw do
+ScottBartell::Application.routes.draw do
   # Blog
   root to: 'posts#index'
   match '/posts.:format', to: 'posts#index'

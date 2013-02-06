@@ -5,7 +5,7 @@ if defined?(Bundler)
   Bundler.require *Rails.groups(:assets => %w(development test))
 end
 
-module SamSoffes
+module ScottBartell
   class Application < Rails::Application
     config.autoload_paths << "#{config.root}/lib"
     config.time_zone = 'Pacific Time (US & Canada)'
