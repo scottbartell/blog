@@ -1,34 +1,22 @@
 ScottBartell::Application.routes.draw do
   # Blog
-  root to: 'posts#index'
+  root to: 'pages#home'
   match '/posts.:format', to: 'posts#index'
 
   resources :tags, only: [:index, :show]
 
+  match '/blog', to:'posts#index'
+
   # Static pages
-  match '/music', to: 'pages#music', as: 'music'
   match '/about', to: 'pages#about', as: 'about'
-  match '/talks', to: 'pages#talks', as: 'talks'
-  match '/projects', to: 'pages#projects', as: 'projects'
 
   # Redirects
-  match '/blog', to: redirect('/')
   match '/posts', to: redirect('/')
   match '/post/:permalink', to: redirect { |params, request| "/#{params[:permalink]}" }
   match '/posts/:permalink', to: redirect { |params, request| "/#{params[:permalink]}" }
   match '/blog/:page', to: redirect { |params, request| "/#{params[:page]}" }
   match '/archive.:format', to: redirect('/blog')
-  match '/music.:format', to: redirect('/music')
-  match '/about.:format', to: redirect('/about')
-  match '/mobilex', to: redirect('/talks')
-  match '/:hellointernet', to: redirect { |params, request| '/tags/hello-internet' }, constraints: { hellointernet: /hello[_-]?internet/ }
-  match '/resume(.:format)', to: redirect('http://assets.samsoff.es/pdf/Sam%20Soffes%20Resume.pdf'), as: 'resume'
-
-  # Awesome source redirects
-  match '/source(/:code_path)' => redirect { |params, request|
-    code_path = params[:code_path] ? "/tree/master/#{params[:code_path]}" : ''
-    "https://github.com/soffes/soff.es#{code_path}"
-  }, constraints: { code_path: /[a-zA-Z0-9_\-\.\/]+/ }
+  match '/about-scott-bartell', to: redirect('/blog')
 
   # Admin
   namespace :admin do
