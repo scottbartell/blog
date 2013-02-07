@@ -1,7 +1,7 @@
 class ScottBartell::PreferredHost
   def initialize(app, options = {})
     @app = app
-    @preferred_host = (options[:host] or 'scottbartell.com')
+    @preferred_host = (options[:host] or 'www.scottbartell.com')
   end
 
   def call(env)
