@@ -21,6 +21,9 @@ gem 'pygmentize'
 # HTML Parsing
 gem 'nokogiri'
 
+# twitter integration
+gem 'twitter'
+
 group :assets do
   # Stylesheet
   gem 'sass', '~> 3.2.0.alpha.277'

@@ -13,6 +13,7 @@ class Admin::PostsController < AdminController
   def create
     @post = Post.new(params[:post])
     if @post.save
+      Twitter.update("#{@post.tweet_text.blank? ? @post.title : @post.tweet_text} #{post_url(@post, host: 'scottbartell.com')}")
       flash[:notice] = 'Successfully created post.'
       redirect_to [:admin, @post]
     else
