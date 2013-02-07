@@ -1,8 +1,24 @@
-div.current-project {
-  margin-bottom: 4em;
-  
-  div.row-wide {
-    margin-bottom: 1em;
+#home {
+  padding-left: 1em;
+
+  h1 {
+    color: #CAC0AE;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 65px;
+    line-height: 1;
+    letter-spacing: -5px;
+
+    span {
+      color: #6A6359;
+      opacity: .7;
+      font-size: 15px;
+      letter-spacing: 0;
+      display: block;
+      margin-left: 15px;
+      margin-top: 10px;
+    }
   }
 }
 
@@ -11,8 +27,36 @@ div.latest-post h3 a {
   color: #777;
 }
 
-span.cheddar {
+span.crowdendowed {
   a {
     color: #ff7243;
+  }
+}
+
+
+nav ul {
+  list-style: none;
+  margin-left: 5px;
+
+  li {
+    a {
+      display: block;
+      float: left;
+      color: #6A6359;
+      text-decoration: none;
+      padding: 2px 9px;
+      margin-right: 7px;
+      margin-left: 7px;
+      border: 1px solid;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      border-radius: 15px;
+      font-size: 15px;
+      opacity: .7;
+    }
+
+    a:hover {
+      opacity: 1;
+    }
   }
 }

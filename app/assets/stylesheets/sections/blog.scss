@@ -1,12 +1,39 @@
 // Post
-section article {
+section article, section.about {
+  width: 640px;
   margin-bottom: 6em;
+  padding: 50px 60px;
+  margin: 40px 0;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2), inset 0 -1px 3px #f8f6f1;
   
   header {
+    h2 {
+      a {
+        color: #c9502f;
+        text-decoration: none;
+        -webkit-transition: opacity .25s, color .25s, border-color .25s;
+        -moz-transition: opacity .25s, color .25s, border-color .25s;
+        -ms-transition: opacity .25s, color .25s, border-color .25s;
+        -o-transition: opacity .25s, color .25s, border-color .25s;
+        transition: opacity .25s, color .25s, border-color .25s;
+        font-size: 2.62em;
+        line-height: 1.25em;
+        font-weight: 300;
+      }
+      a:hover {
+        color: #9a2f13;
+        border: none;
+      }
+    }
+
     p {
       color: #949494;
-      font-size: 0.9em;
-      margin-bottom: 0.25em;
+      font-style: italic;
+      font-size: 1em;
+      margin-bottom: 1.62em;
+      margin-top: 1em;
       
       a {
         color: #949494;
@@ -15,6 +42,14 @@ section article {
     }
   }
   
+  h3 {
+    font-size: 1.6em;
+    color: #c9502f;
+    font-weight: 400;
+    margin-top: 1em;
+    margin-bottom: .62em;
+  }
+
   ul, ol {
     margin: 0 0 2em 0.5em;
     
@@ -86,7 +121,7 @@ section article {
 div.social {
   @include clearfix;
   overflow: hidden;
-  margin: -4em 0 1em; // Ugly
+  margin: -5.5em 4em 4em; // Still Ugly
   
   iframe.twitter-follow-button {
     float: right;

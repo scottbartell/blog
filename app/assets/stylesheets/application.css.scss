@@ -19,10 +19,10 @@ html {
 
 body {
   color: $text-color;
-  font-family: 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 1.5em;
+  background-color: $body-background-color;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  line-height: 1.62em;
   padding: 0 10px;
 }
 
@@ -129,7 +129,7 @@ code {
 
 h1 {
   color: #000;
-  font-size: 2.5em;
+  font-size: 2.61em;
   font-weight: 700;
   margin-bottom: 0.5em;
 }
@@ -137,20 +137,9 @@ h1 {
 body > header h1 {
   a, a:hover {
     color: $red-color;
+    letter-spacing: -2px;
     border: 0;
   }
-}
-
-
-h2 {
-  font-size: 1.3em;
-  margin-bottom: 0.2em;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 1em;
-  font-weight: bold;
 }
 
 h2, h3 {
@@ -174,11 +163,12 @@ body > header, body > section, body > footer {
 
 // Header
 body > header {
-  color: #949494;
-  margin: 5em auto 4em;
+  color: #6A6359;
+  margin: 4.23em auto 2.61em;
+  padding-left: 4.23em;
 
   p {
-    margin: 0;
+    color: #aaa;
   }
 
   @media #{$small-query} {
