@@ -2,23 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title><%= (yield(:title) && !yield(:title).empty? ? yield(:title) : 'Sam Soffes') %></title>
-  <link href="<%= posts_url(format: :atom) %>" rel="alternate" title="soff.es" type="application/atom+xml" />
+  <title><%= (yield(:title) && !yield(:title).empty? ? yield(:title) : 'Scott Bartell') %></title>
+  <link href="<%= posts_url(format: :atom) %>" rel="alternate" title="scottbartell.com" type="application/atom+xml" />
   <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>" />
-  <link rel="apple-touch-icon-precomposed" href="http://assets.samsoff.es/images/apple-touch-icon.png">
-  <link rel="me" href="http://www.google.com/profiles/samsoffes" />
-  <link rel="author" type="text/plain" href="http://soff.es/humans.txt" />
+  <link rel="me" href="https://plus.google.com/u/0/109955571462751281352" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' -%>
   <meta property="fb:app_id" content="<%= FACEBOOK_APP_ID %>" />
-  <meta property="og:site_name" content="soff.es" />
+  <meta property="og:site_name" content="scottbartell.com" />
   <%- unless @post -%>
-  <link rel="canonical" href="http://soff.es/" />
-  <meta property="og:description" content="The blog of Sam Soffes" />
-  <meta property="og:title" content="soff.es" />
+  <link rel="canonical" href="http://scottbartell.com/" />
+  <meta property="og:description" content="The blog of Scott Bartell" />
+  <meta property="og:title" content="scottbartell.com" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://soff.es/" />
+  <meta property="og:url" content="http://scottbartell.com/" />
   <%- end -%>
   <%= yield(:head) -%>
 </head>
@@ -27,6 +25,19 @@
   <%= yield %>
   <%= yield :post_content %>
   <%= yield :end %>
-  <%= gauges '4f455996cb25bc5d88000087' %>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2112660-3']);
+  _gaq.push(['_setDomainName', 'scottbartell.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </body>
 </html>
