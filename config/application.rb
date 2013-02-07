@@ -8,7 +8,7 @@ end
 module ScottBartell
   class Application < Rails::Application
     config.autoload_paths << "#{config.root}/lib"
-    config.time_zone = 'Pacific Time (US & Canada)'
+    config.time_zone = 'Eastern Time (US & Canada)'
     config.encoding = 'utf-8'
     config.filter_parameters << :password
     config.secret_token = "n7@XY2a!pUj{oYK*cQ{VqVDH[8DRRhZdQQy!i,Rnw;BZS/7Xk_S8p9Wd@m"
