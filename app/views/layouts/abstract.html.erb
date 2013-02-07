@@ -21,9 +21,9 @@
   <%= yield(:head) -%>
 </head>
 <body<%= yield(:body_class) && !yield(:body_class).empty? ? %Q{ class="#{yield(:body_class)}"}.html_safe : '' %>>
-  <%= yield :pre_content %>
+  <%= yield :pre_content unless controller.action_name == "home" %>
   <%= yield %>
-  <%= yield :post_content %>
+  <%= yield :post_content unless controller.action_name == "home" %>
   <%= yield :end %>
 <script type="text/javascript">
 
