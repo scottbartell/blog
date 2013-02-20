@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Rails
 gem 'rails', '3.2.11'
 
-# Postgres
-gem 'pg'
+
+gem 'mysql2'
 
 # Web server
 gem 'thin'
@@ -38,6 +38,10 @@ end
 
 group :development do
   gem 'quiet_assets'
+
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'rvm-capistrano'
 end
 
 group :test do
